@@ -1,7 +1,9 @@
 import axios from "axios";
 
-import { CurrencyExchangeRate } from "../../types";
 import { URL } from "../constants";
+import { checkError } from "../helperFunctions";
+
+import { CurrencyExchangeRate } from "../../types";
 
 type Metadata = {
   createdAt: string;
@@ -14,7 +16,12 @@ type CurrenciesRate = {
   metadata?: Metadata;
 };
 
-export async function fetchCurrencies() {
+type FetchCurrenciesProps = {
+  counter: number;
+  setCounter?: (value: number) => void;
+};
+
+export async function fetchCurrencies({ counter }: FetchCurrenciesProps) {
   const { data } = await axios<CurrenciesRate>({
     method: "get",
     url: URL,
@@ -23,6 +30,10 @@ export async function fetchCurrencies() {
         "$2a$10$uWRKO7mGQfOkTcozK8Xs9eq4m/09MjI9/QsZqI39nrZboHzk4CHOG",
     },
   });
+
+  if (checkError(counter)) {
+    throw new Error();
+  }
 
   return data.record;
 }
