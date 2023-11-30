@@ -1,0 +1,10 @@
+.tableCell {
+  position: relative;
+}
+
+.editButton {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  position: absolute;
+}

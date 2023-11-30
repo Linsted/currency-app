@@ -1,4 +1,4 @@
-import ChartItemCellEditable from "../ChartItemCell";
+import ChartItemCell from "../ChartItemCell";
 import { CurrencyExchangeRate } from "../../types";
 
 export default function ChartItem({
@@ -14,8 +14,8 @@ export default function ChartItem({
   return (
     <tr>
       <td>{`${ccy}/${base_ccy}`}</td>
-      <ChartItemCellEditable content={buy} dataToEdit={dataToEditBuy} />
-      <ChartItemCellEditable content={sale} dataToEdit={dataToEditSale} />
+      <ChartItemCell content={buy} dataToEdit={dataToEditBuy} />
+      <ChartItemCell content={sale} dataToEdit={dataToEditSale} />
     </tr>
   );
 }
