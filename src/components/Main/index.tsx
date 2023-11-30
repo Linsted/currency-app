@@ -50,8 +50,8 @@ export default function Main() {
   });
 
   // console.log(counter);
-  // console.log(currencies);
-
+  console.log(currencies);
+  debugger;
   if (isLoading) {
     return <div>LOADING</div>;
   }
