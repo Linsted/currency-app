@@ -1,16 +1,19 @@
 .textarea {
   resize: none;
   border: none;
-  background-color: white;
+  background-color: var(--whiteColor);
   text-align: center;
+}
+
+.form {
+  position: relative;
 }
 
 .button {
   display: none;
-  background-color: white;
+  background-color: var(--whiteColor);
   border: none;
-  position: absolute;
-  right: 210px;
+  position: fixed;
 }
 
 .button:hover {
@@ -22,6 +25,7 @@
 }
 
 .buttonGroup {
-  background-color: white;
+  background-color: var(--whiteColor);
   border: none;
+  margin-top: 4px;
 }

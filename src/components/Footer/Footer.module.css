@@ -1,3 +1,11 @@
 .footer {
   flex-basis: 100px;
+  background-color: var(--mainColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerText {
+  color: var(--whiteColor);
 }

@@ -1,5 +1,11 @@
 import styles from "./Footer.module.css";
 
 export default function Footer() {
-  return <footer className={styles.footer}>Footer</footer>;
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className={styles.footer}>
+      <p className={styles.footerText}>{currentYear} © All rights reserved</p>
+    </footer>
+  );
 }

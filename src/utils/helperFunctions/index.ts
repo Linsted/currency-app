@@ -5,6 +5,16 @@ type CheckIsDataValid = {
   newNumber: string;
 };
 
+type GetExchangeRate = {
+  firstCurrencyRate: string;
+  secondCurrencyRate: string;
+};
+
+type ConvertCurrency = {
+  amount: string;
+  exchangeRate: number;
+};
+
 const resetLocalStore = () => {
   localStorage.removeItem(COUNTER_LOCAL_STORAGE_KEY);
 };
@@ -34,4 +44,33 @@ export const checkIsDataValid = ({
   }
 
   return true;
+};
+
+export const getExchangeRate = ({
+  firstCurrencyRate,
+  secondCurrencyRate,
+}: GetExchangeRate): number => {
+  const exchangeRate = Number(firstCurrencyRate) / Number(secondCurrencyRate);
+
+  return exchangeRate;
+};
+
+export const convertCurrency = ({
+  amount,
+  exchangeRate,
+}: ConvertCurrency): string | null => {
+  const numericAmount = Number(amount);
+
+  if (
+    Number.isNaN(numericAmount) ||
+    Number.isNaN(exchangeRate) ||
+    numericAmount < 0 ||
+    exchangeRate <= 0
+  ) {
+    return null;
+  }
+
+  const convertedAmount = numericAmount * exchangeRate;
+
+  return convertedAmount.toFixed(2);
 };

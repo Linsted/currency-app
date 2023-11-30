@@ -1,4 +1,6 @@
 import useSWR from "swr";
+import { Toaster } from "react-hot-toast";
+import { ThreeCircles } from "react-loader-spinner";
 
 import styles from "./Main.module.css";
 import { CURRENCIES_KEY } from "./constants";
@@ -21,6 +23,7 @@ import {
   setCurrenciesSelector,
 } from "../../store/currencies/selectors";
 import Chart from "../Chart";
+import Converter from "../Converter";
 
 export default function Main() {
   const setCurrencies = useCurrenciesStore(setCurrenciesSelector);
@@ -49,15 +52,21 @@ export default function Main() {
     onError: errorOptions,
   });
 
-  // console.log(counter);
-  console.log(currencies);
-
   if (isLoading) {
-    return <div>LOADING</div>;
+    return (
+      <div className={styles.loaderWrapper}>
+        <ThreeCircles height="100" width="100" color="#0d6efd" visible={true} />
+      </div>
+    );
   }
+
   return (
     <main className={styles.main}>
       {isError ? <NotFound /> : <Chart currencies={currencies} />}
+      <Converter currencies={currencies} />
+      <div>
+        <Toaster />
+      </div>
     </main>
   );
 }
