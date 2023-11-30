@@ -1,0 +1,14 @@
+#firstInput {
+  width: 25vw;
+
+  @media (max-width: 500px) {
+    width: 35vw;
+  }
+}
+
+.wrapper {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}

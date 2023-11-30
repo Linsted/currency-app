@@ -62,28 +62,19 @@ export default function CellForm({ content, dataToEdit }: CellFormProps) {
   const handleConfirm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formElement = event.target as HTMLFormElement;
+
     const { value } = formElement.currency;
 
     if (checkIsDataValid({ initialNumber: finalContent, newNumber: value })) {
       setIsDisabled(true);
       setFinalContent(value);
-      console.log("CORRECT DATA");
-      updateCurrency({ ...dataToEdit, newData: value });
-      return;
-    }
 
-    // if (inputRef.current) {
-    //   inputRef.current.value = finalContent;
-    // }
-    // setFinalContent(finalContent);
-    // setIsDisabled(true);
-    // console.log("WRONG DATA");
+      updateCurrency({ ...dataToEdit, newData: value });
+    }
   };
 
-  //   console.log(finalContent);
-
   return (
-    <form onSubmit={(event) => handleConfirm(event)}>
+    <form className={styles.form} onSubmit={(event) => handleConfirm(event)}>
       <input
         onChange={(event) => handleChange(event)}
         name="currency"

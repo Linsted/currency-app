@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { useId } from "react";
-
 import styles from "./ChartItemCell.module.css";
 
 import CellForm from "../CellForm";
