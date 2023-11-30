@@ -30,3 +30,9 @@ export type DataToEdit = {
   ccy: string;
   valueToEdit: string;
 };
+
+export enum BUTTON_TYPE {
+  SUBMIT = "submit",
+  RESET = "reset",
+  BUTTON = "button",
+}

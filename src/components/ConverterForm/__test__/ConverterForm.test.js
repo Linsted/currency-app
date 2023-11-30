@@ -13,10 +13,8 @@ describe("ConverterForm component", () => {
     render(<ConverterForm currencies={mockCurrencies} />);
     const inputElement = screen.getByPlaceholderText("Enter digit");
     const submitButtonElement = screen.getByText("⇆");
-    const resultElement = screen.getByPlaceholderText("...");
 
     expect(inputElement).toBeInTheDocument();
     expect(submitButtonElement).toBeInTheDocument();
-    expect(resultElement).toBeInTheDocument();
   });
 });

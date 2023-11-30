@@ -1,10 +1,11 @@
 import styles from "./NotFound.module.css";
+import { ERROR_USER_MESSAGE } from "./constants";
 
 export default function NotFound() {
   return (
     <div className={styles.wrapper}>
       <img src="/error.png" alt="Not found" />
-      <h4>Sorry, Mate. Try again later!</h4>
+      <b>{ERROR_USER_MESSAGE}</b>
     </div>
   );
 }

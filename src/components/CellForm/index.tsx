@@ -1,83 +1,36 @@
-import { useRef, useState } from "react";
-
 import styles from "./CellForm.module.css";
+import useCellForm from "./useCellForm";
+import { BUTTON_CONTENT, INPUT_NAME } from "./constants";
 
 import Button from "../Button";
-import { checkIsDataValid } from "../../utils/helperFunctions";
-import { DataToEdit } from "../../types";
-import { setUpdateCurrencySelector } from "../../store/currencies/selectors";
-import { useCurrenciesStore } from "../../store/currencies/useCurrenciesStore";
+import { BUTTON_TYPE, DataToEdit } from "../../types";
 
-type CellFormProps = {
+export type CellFormProps = {
   content: string;
   dataToEdit: DataToEdit;
 };
 
 export default function CellForm({ content, dataToEdit }: CellFormProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [isValid, setIsValid] = useState(false);
-  const [finalContent, setFinalContent] = useState(content);
-
-  const updateCurrency = useCurrenciesStore(setUpdateCurrencySelector);
-
-  const handleEdit = async () => {
-    await new Promise<void>((resolve) => {
-      setIsDisabled(false);
-      setIsValid(true);
-      resolve();
-    });
-
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
-  const handleCancel = () => {
-    if (inputRef.current) {
-      inputRef.current.value = finalContent;
-    }
-
-    setIsDisabled(true);
-    setFinalContent(finalContent);
-  };
-
-  const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
-    if (event.relatedTarget === null) {
-      event.target.focus();
-    }
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    if (checkIsDataValid({ initialNumber: finalContent, newNumber: value })) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-  };
-
-  const handleConfirm = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formElement = event.target as HTMLFormElement;
-
-    const { value } = formElement.currency;
-
-    if (checkIsDataValid({ initialNumber: finalContent, newNumber: value })) {
-      setIsDisabled(true);
-      setFinalContent(value);
-
-      updateCurrency({ ...dataToEdit, newData: value });
-    }
-  };
+  const {
+    inputRef,
+    handleConfirm,
+    handleChange,
+    handleBlur,
+    handleCancel,
+    handleEdit,
+    isValid,
+    isDisabled,
+    finalContent,
+  } = useCellForm({
+    content,
+    dataToEdit,
+  });
 
   return (
     <form className={styles.form} onSubmit={(event) => handleConfirm(event)}>
       <input
         onChange={(event) => handleChange(event)}
-        name="currency"
+        name={INPUT_NAME}
         autoComplete="off"
         onBlur={(event) => handleBlur(event)}
         ref={inputRef}
@@ -87,19 +40,23 @@ export default function CellForm({ content, dataToEdit }: CellFormProps) {
         maxLength={9}
       />
       {isDisabled && (
-        <Button onClick={handleEdit} content="🖊" classes={styles.button} />
+        <Button
+          onClick={handleEdit}
+          content={BUTTON_CONTENT.EDIT}
+          classes={styles.button}
+        />
       )}
       {!isDisabled && (
         <div>
           <Button
             disabled={!isValid}
-            content="✓"
+            content={BUTTON_CONTENT.CONFIRM}
             classes={styles.buttonGroup}
-            type="submit"
+            type={BUTTON_TYPE.SUBMIT}
           />
           <Button
             onClick={handleCancel}
-            content="✗"
+            content={BUTTON_CONTENT.CANCEL}
             classes={styles.buttonGroup}
           />
         </div>

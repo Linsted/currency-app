@@ -1,11 +1,11 @@
 import ChartItemCell from "../ChartItemCell";
 import { CurrencyExchangeRate } from "../../types";
 
-export default function ChartItem({
-  currency,
-}: {
+type ChartItemType = {
   currency: CurrencyExchangeRate;
-}) {
+};
+
+export default function ChartItem({ currency }: ChartItemType) {
   const { ccy, base_ccy, buy, sale } = currency;
 
   const dataToEditBuy = { ccy, valueToEdit: "buy" };

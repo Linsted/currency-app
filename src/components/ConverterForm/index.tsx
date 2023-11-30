@@ -1,62 +1,41 @@
-import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import toast from "react-hot-toast";
 
 import styles from "./ConverterForm.module.css";
+import {
+  SELECTOR,
+  INPUT_TYPES,
+  INPUT_NAME,
+  INPUT_PLACEHOLDER,
+  BUTTON_CONTENT,
+} from "./constants";
 
-import { CurrencyExchangeRate } from "../../types";
+import { BUTTON_TYPE, CurrencyExchangeRate } from "../../types";
 import CurrencySelect from "../CurrencySelect";
-import { getExchangeRate, convertCurrency } from "../../utils/helperFunctions";
+import useConverterForm from "./useConverterForm";
 
 type ConverterFormProps = { currencies: CurrencyExchangeRate[] };
 
 export default function ConverterForm({ currencies }: ConverterFormProps) {
-  const [inputValue, setInputValue] = useState(" ");
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formElement = event.target as HTMLFormElement;
-
-    const firstCurrencyRate = formElement.firstSelect.value;
-    const secondCurrencyRate = formElement.secondSelect.value;
-    const inputValue = formElement.input.value;
-
-    const exchangeRate = getExchangeRate({
-      firstCurrencyRate,
-      secondCurrencyRate,
-    });
-
-    const finalValue = convertCurrency({
-      amount: String(inputValue),
-      exchangeRate,
-    });
-
-    if (!finalValue) {
-      return toast.error("Please, enter valid data!");
-    }
-
-    setInputValue(finalValue);
-  };
+  const { inputValue, handleSubmit } = useConverterForm();
 
   return (
     <Form onSubmit={(event) => handleSubmit(event)}>
       <div className={styles.wrapper}>
         <Form.Control
-          name="input"
-          type="number"
-          placeholder="Enter digit"
+          name={INPUT_NAME}
+          type={INPUT_TYPES.number}
+          placeholder={INPUT_PLACEHOLDER}
           className={styles.input}
         />
-        <CurrencySelect currencies={currencies} name="firstSelect" />
-        <Button data-testid="submit-button" type="submit" variant="primary">
-          ⇆
+        <CurrencySelect currencies={currencies} name={SELECTOR.FIRST_NAME} />
+        <Button type={BUTTON_TYPE.SUBMIT} variant="primary">
+          {BUTTON_CONTENT}
         </Button>
-        <CurrencySelect currencies={currencies} name="secondSelect" />
+        <CurrencySelect currencies={currencies} name={SELECTOR.SECOND_NAME} />
         <Form.Control
-          type="text"
+          type={INPUT_TYPES.TEXT}
           value={inputValue}
-          placeholder="..."
           disabled
           readOnly
         />

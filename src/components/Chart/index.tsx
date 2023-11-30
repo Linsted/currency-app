@@ -1,8 +1,8 @@
 import Table from "react-bootstrap/Table";
 
-import { CurrencyExchangeRate } from "../../types";
 import ChartItem from "../ChartItem";
 import ChartHead from "../ChartHead";
+import { CurrencyExchangeRate } from "../../types";
 
 type ChartProps = {
   currencies: CurrencyExchangeRate[];
