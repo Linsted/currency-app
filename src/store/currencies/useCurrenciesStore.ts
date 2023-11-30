@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { CurrenciesStore } from "../../types";
+import { CurrenciesStore, UpdateCurrency } from "../../types";
 
 export const useCurrenciesStore = create<CurrenciesStore>()((set) => ({
   currencies: [],
@@ -18,5 +18,17 @@ export const useCurrenciesStore = create<CurrenciesStore>()((set) => ({
 
   setError: () => {
     set((state) => ({ ...state, isError: true, isLoading: false }));
+  },
+
+  updateCurrency: (dataToUpdate: UpdateCurrency) => {
+    set((state) => ({
+      ...state,
+      currencies: state.currencies.map((item) => {
+        if (dataToUpdate.ccy === item.ccy) {
+          return { ...item, [dataToUpdate.valueToEdit]: dataToUpdate.newData };
+        }
+        return item;
+      }),
+    }));
   },
 }));

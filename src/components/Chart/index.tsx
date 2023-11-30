@@ -10,7 +10,7 @@ type ChartProps = {
 
 export default function Chart({ currencies }: ChartProps) {
   return (
-    <Table striped bordered hover variant="dark">
+    <Table bordered size="sm">
       <ChartHead />
       <tbody>
         {currencies.map((currency) => (

@@ -11,10 +11,22 @@ export type CounterStore = {
   resetCounter: () => void;
 };
 
+export type UpdateCurrency = {
+  ccy: string;
+  valueToEdit: string;
+  newData: string;
+};
+
 export type CurrenciesStore = {
   currencies: CurrencyExchangeRate[];
   isLoading: boolean;
   isError: boolean;
   setCurrencies: (currencies: CurrencyExchangeRate[]) => void;
   setError: () => void;
+  updateCurrency: (dataToUpdate: UpdateCurrency) => void;
+};
+
+export type DataToEdit = {
+  ccy: string;
+  valueToEdit: string;
 };

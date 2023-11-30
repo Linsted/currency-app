@@ -9,3 +9,6 @@ export const getCurrenciesSelector = (state: CurrenciesStore) =>
 
 export const setCurrenciesSelector = (state: CurrenciesStore) =>
   state.setCurrencies;
+
+export const setUpdateCurrencySelector = (state: CurrenciesStore) =>
+  state.updateCurrency;
