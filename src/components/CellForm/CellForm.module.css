@@ -1,0 +1,27 @@
+.textarea {
+  resize: none;
+  border: none;
+  background-color: white;
+  text-align: center;
+}
+
+.button {
+  display: none;
+  background-color: white;
+  border: none;
+  position: absolute;
+  right: 210px;
+}
+
+.button:hover {
+  display: inline-block;
+}
+
+.textarea:hover ~ .button {
+  display: inline-block;
+}
+
+.buttonGroup {
+  background-color: white;
+  border: none;
+}
