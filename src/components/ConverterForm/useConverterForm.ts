@@ -4,9 +4,13 @@ import toast from "react-hot-toast";
 import { ERROR_TEXT } from "./constants";
 
 import { getExchangeRate, convertCurrency } from "../../utils/helperFunctions";
+import { useCurrenciesStore } from "../../store/currencies/useCurrenciesStore";
+import { getCurrenciesSelector } from "../../store/currencies/selectors";
 
 export default function useConverterForm() {
   const [inputValue, setInputValue] = useState(" ");
+
+  const currencies = useCurrenciesStore(getCurrenciesSelector);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -33,5 +37,5 @@ export default function useConverterForm() {
     setInputValue(finalValue);
   };
 
-  return { inputValue, handleSubmit };
+  return { inputValue, handleSubmit, currencies };
 }

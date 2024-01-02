@@ -10,21 +10,19 @@ import {
   BUTTON_CONTENT,
 } from "./constants";
 
-import { BUTTON_TYPE, CurrencyExchangeRate } from "../../types";
+import { BUTTON_TYPE } from "../../types";
 import CurrencySelect from "../CurrencySelect";
 import useConverterForm from "./useConverterForm";
 
-type ConverterFormProps = { currencies: CurrencyExchangeRate[] };
-
-export default function ConverterForm({ currencies }: ConverterFormProps) {
-  const { inputValue, handleSubmit } = useConverterForm();
+export default function ConverterForm() {
+  const { inputValue, handleSubmit, currencies } = useConverterForm();
 
   return (
     <Form onSubmit={(event) => handleSubmit(event)}>
       <div className={styles.wrapper}>
         <Form.Control
           name={INPUT_NAME}
-          type={INPUT_TYPES.number}
+          type={INPUT_TYPES.NUMBER}
           placeholder={INPUT_PLACEHOLDER}
           className={styles.input}
         />

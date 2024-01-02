@@ -7,7 +7,7 @@ export enum SELECTOR {
 
 export enum INPUT_TYPES {
   TEXT = "text",
-  number = "number",
+  NUMBER = "number",
 }
 
 export const INPUT_NAME = "input";

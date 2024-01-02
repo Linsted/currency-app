@@ -9,7 +9,7 @@ import Chart from "../Chart";
 import Converter from "../Converter";
 
 export default function Main() {
-  const { isLoading, isError, currencies } = useMain();
+  const { isLoading, isError } = useMain();
 
   if (isLoading) {
     return (
@@ -21,8 +21,8 @@ export default function Main() {
 
   return (
     <main className={styles.main}>
-      {isError ? <NotFound /> : <Chart currencies={currencies} />}
-      <Converter currencies={currencies} />
+      {isError ? <NotFound /> : <Chart />}
+      <Converter />
       <div>
         <Toaster />
       </div>

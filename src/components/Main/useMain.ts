@@ -3,7 +3,6 @@ import useSWR from "swr";
 import { CURRENCIES_KEY } from "./constants";
 
 import { useCurrenciesStore } from "../../store/currencies/useCurrenciesStore";
-
 import { CurrencyExchangeRate } from "../../types";
 import { fetchCurrencies } from "../../utils/facade/fetchCurrencies";
 import { useCounterStore } from "../../store/counter/useCounterStore";
@@ -15,7 +14,6 @@ import {
 import {
   getErrorSelector,
   setErrorSelector,
-  getCurrenciesSelector,
   setCurrenciesSelector,
 } from "../../store/currencies/selectors";
 
@@ -25,7 +23,6 @@ export default function useMain() {
   const increaseCounter = useCounterStore(increaseCounterSelector);
   const resetCounter = useCounterStore(resetCounterSelector);
 
-  const currencies = useCurrenciesStore(getCurrenciesSelector);
   const isError = useCurrenciesStore(getErrorSelector);
   const counter = useCounterStore(getCounterSelector);
 
@@ -46,5 +43,5 @@ export default function useMain() {
     onError: errorOptions,
   });
 
-  return { isLoading, isError, currencies };
+  return { isLoading, isError };
 }
